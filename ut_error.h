@@ -16,12 +16,11 @@
 #define __GXT_UT_ERROR_INCLUDED__
 
 #include <stdio.h>
-//#include <string.h>
 #include <unistd.h>						// for sleep function
 
 
 //--------------------------------------------------------------
-// ut_error(message)				Report an error message in a consistent format (showing the calling program and line number) to stderr
+// ut_error(message)		Report an error message in a consistent format (showing the calling program and line number) to stderr
 //
 //	examples:-							Output:-									#TODO Do something with errno?
 //		ut_error("Status=%d", ios);		[ERROR] (src=program.c :36) Status=-1
@@ -36,8 +35,8 @@
 // ut_log(message)					Log a message in a consistent format (showing the calling program and line number) to stderr
 //
 //	examples:-							Output:-
-//		ut_log("Status=%d", ios);		[LOG] (source=program.c :36) Status=0
-//		ut_log("New file created");		[LOG] (source=program.c :50) New file created
+//		ut_log("Status=%d", ios);		[LOG] (src=program.c :36) Status=0
+//		ut_log("New file created");		[LOG] (src=program.c :50) New file created
 //--------------------------------------------------------------
 
 #define ut_log(M, ...)   fprintf(stderr, "[LOG] (src=%s :%d) " M "\n", __FILE__, __LINE__, ##__VA_ARGS__)
@@ -48,7 +47,7 @@
 //
 //	examples:-													Output:-
 //		ut_check(i > 0, "Invalid number %d", i);				[ERROR] (src=program.c :36) Invalid number -1
-//		ut_check(open_file(sFn) == 0, "Failed to open");		[ERROR] (scr:program.c :25) Failed to open
+//		ut_check(open_file(sFn) == 0, "Failed to open");		[ERROR] (src=program.c :25) Failed to open
 //--------------------------------------------------------------
 
 #define ut_check(A, M, ...) if(!(A)) { ut_error(M, ##__VA_ARGS__); goto error; }
